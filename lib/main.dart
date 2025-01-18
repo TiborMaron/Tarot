@@ -32,23 +32,16 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int selectedIndex = 0;
 
+  final List<Widget> pages = [
+    Placeholder(),
+    Placeholder(),
+    Placeholder(),
+    const TestPage(),
+  ];
+
+
   @override
   Widget build(BuildContext context) {
-    
-    Widget page;
-    switch (selectedIndex) {
-      case 0:
-        page = Placeholder();
-      case 1:
-        page = Placeholder();
-      case 2:
-        page = Placeholder();
-      case 3:
-        page = TestPage();
-      default:
-        throw UnimplementedError('no widget for $selectedIndex');
-    }
-
     return LayoutBuilder(
       builder: (context, constraints) {
         return Scaffold(
@@ -61,7 +54,7 @@ class _HomePageState extends State<HomePage> {
               SafeArea(
                 child: NavigationRail(
                   extended: constraints.maxWidth >= 600,
-                  destinations: [
+                  destinations: const [
                     NavigationRailDestination(
                       icon: Icon(Icons.home),
                       label: Text('Home'),
@@ -74,7 +67,7 @@ class _HomePageState extends State<HomePage> {
                       icon: Icon(Icons.collections_bookmark),
                       label: Text('Cards'),
                     ),
-                      NavigationRailDestination(
+                    NavigationRailDestination(
                       icon: Icon(Icons.build),
                       label: Text('Test'),
                     ),
@@ -90,7 +83,7 @@ class _HomePageState extends State<HomePage> {
               Expanded(
                 child: Container(
                   color: Theme.of(context).colorScheme.primaryContainer,
-                  child: page,
+                  child: pages[selectedIndex],
                 ),
               ),
             ],
