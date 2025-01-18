@@ -74,6 +74,10 @@ class _HomePageState extends State<HomePage> {
                       icon: Icon(Icons.collections_bookmark),
                       label: Text('Cards'),
                     ),
+                      NavigationRailDestination(
+                      icon: Icon(Icons.build),
+                      label: Text('Test'),
+                    ),
                   ],
                   selectedIndex: selectedIndex,
                   onDestinationSelected: (value) {
