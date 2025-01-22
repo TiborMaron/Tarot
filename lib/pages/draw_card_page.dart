@@ -7,12 +7,28 @@ class DrawCard extends StatefulWidget {
   DrawCardState createState() => DrawCardState();
 }
 
-class DrawCardState extends State<DrawCard> {
+class DrawCardState extends State<DrawCard> with SingleTickerProviderStateMixin {
+  late final AnimationController _controller = AnimationController(
+    duration: const Duration(milliseconds: 600),
+    vsync: this,
+  );
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }  
+
   bool _showImage = false;
 
   void _toggleImage() {
     setState(() {
       _showImage = !_showImage;
+      if (_showImage) {
+        _controller.forward();
+      } else {
+        _controller.reverse();
+      }
     });
   }
 
@@ -26,18 +42,37 @@ class DrawCardState extends State<DrawCard> {
             child: Column(
               children: [
                 Expanded(
-                  flex: 7, // 80%-os magasság a képnek
+                  flex: 7,
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20.0),
-                      child: Image.asset(
-                        'assets/cards/cover.webp',
-                        fit: BoxFit.contain, // A kép arányosan illeszkedik
-                      ),
+                    child: AnimatedBuilder(
+                      animation: _controller,
+                      builder: (context, child) {
+                        final rotationValue = _controller.value * 3.14159; // PI for 180-degree rotation
+                        final isFlipped = rotationValue > 3.14159 / 2;
+                        return Transform(
+                          alignment: Alignment.center,
+                          transform: Matrix4.identity()
+                            ..setEntry(3, 2, 0.001)
+                            ..rotateY(rotationValue),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: isFlipped
+                                ? Image.asset(
+                                    'assets/cards/the_tower.webp',
+                                    fit: BoxFit.contain,
+                                  )
+                                : Image.asset(
+                                    'assets/cards/cover.webp',
+                                    fit: BoxFit.contain,
+                                  ),
+                          ),
+                        );
+                      },
                     ),
                   ),
                 ),
+
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: TextField(
@@ -54,23 +89,6 @@ class DrawCardState extends State<DrawCard> {
                   label: const Text('Show Card'),
                 ),
               ],
-            ),
-          ),
-
-          // Show Card
-          if (_showImage)
-            GestureDetector(
-              onTap: _toggleImage,
-              child: Container(
-                alignment: Alignment.center,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(16.0),
-                  child: Image.asset(
-                    'assets/cards/the_tower.webp',
-                    height: MediaQuery.of(context).size.height * 0.8,
-                    fit: BoxFit.fitHeight,
-                ),
-              ),
             ),
           ),
         ],
