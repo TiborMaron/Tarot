@@ -23,11 +23,41 @@ class DrawCardState extends State<DrawCard> {
       body: Stack(
         children: [
           Center(
-            child: ElevatedButton.icon(
-              onPressed: _toggleImage,
-              label: const Text('Show Card'),
+            child: Column(
+              children: [
+                Expanded(
+                  flex: 7, // 80%-os magasság a képnek
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20.0),
+                      child: Image.asset(
+                        'assets/cards/cover.webp',
+                        fit: BoxFit.contain, // A kép arányosan illeszkedik
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: TextField(
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: 'Write your question here!',
+                    ),
+                    textAlignVertical: TextAlignVertical.top,
+                  ),
+                ),
+                ElevatedButton.icon(
+                  onPressed: _toggleImage,
+                  icon: const Icon(Icons.visibility),
+                  label: const Text('Show Card'),
+                ),
+              ],
             ),
           ),
+
+          // Show Card
           if (_showImage)
             GestureDetector(
               onTap: _toggleImage,
