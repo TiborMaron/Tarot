@@ -35,7 +35,7 @@ class DrawCardState extends State<DrawCard> with SingleTickerProviderStateMixin 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(0, 0, 0, 150),
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: Stack(
         children: [
           Center(
@@ -72,22 +72,31 @@ class DrawCardState extends State<DrawCard> with SingleTickerProviderStateMixin 
                     ),
                   ),
                 ),
-
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: TextField(
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
+                      hintStyle: TextStyle(color: Colors.grey),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black),
+                        borderRadius: BorderRadius.circular(16.0)
+                      ),
                       hintText: 'Write your question here!',
                     ),
                     textAlignVertical: TextAlignVertical.top,
                   ),
                 ),
+                SizedBox(height: 16),
                 ElevatedButton.icon(
                   onPressed: _toggleImage,
-                  icon: const Icon(Icons.visibility),
-                  label: const Text('Show Card'),
+                  icon: const Icon(Icons.visibility, color: Colors.black),
+                  label: const Text(
+                    'Show Card',
+                    style: TextStyle(color: Colors.black),),
                 ),
+                SizedBox(height: 20),
               ],
             ),
           ),

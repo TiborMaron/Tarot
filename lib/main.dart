@@ -14,7 +14,17 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Tarot',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color.fromRGBO(64, 224, 208, 1),
+          brightness: Brightness.light,
+          primary: const Color.fromARGB(255, 98, 231, 218),
+          surface: const Color.fromRGBO(175, 238, 238, 1),
+          error: Colors.red,
+          onPrimary: Colors.black,
+          onSecondary: Colors.white,
+          onSurface: Colors.black,
+          onError: Colors.white,
+        ),
         useMaterial3: true,
       ),
       home: const HomePage(title: 'Tarot'),
@@ -47,15 +57,16 @@ class _HomePageState extends State<HomePage> {
     return LayoutBuilder(
       builder: (context, constraints) {
         return Scaffold(
-          appBar: AppBar(
-            backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-            title: Text(widget.title),
-          ),
+          // appBar: AppBar(
+          //   backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+          //   title: Text(widget.title),
+          // ),
           body: Row(
             children: [
               SafeArea(
                 child: NavigationRail(
-                  extended: constraints.maxWidth >= 600,
+                  backgroundColor: Theme.of(context).colorScheme.primary,
+                  extended: constraints.maxWidth >= 800,
                   destinations: const [
                     NavigationRailDestination(
                       icon: Icon(Icons.home),
