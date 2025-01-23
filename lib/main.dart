@@ -64,7 +64,7 @@ class _HomePageState extends State<HomePage> {
               SafeArea(
                 child: NavigationRail(
                   backgroundColor: Theme.of(context).colorScheme.primary,
-                  extended: constraints.maxWidth >= 800,
+                  extended: false,
                   destinations: const [
                     NavigationRailDestination(
                       icon: Icon(Icons.home),
