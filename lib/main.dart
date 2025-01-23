@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'pages/test_page.dart';
 import 'pages/draw_card_page.dart';
 
 void main() {
@@ -48,7 +47,6 @@ class _HomePageState extends State<HomePage> {
     DrawCard(),
     Placeholder(),
     Placeholder(),
-    const TestPage(),
   ];
 
 
@@ -79,10 +77,6 @@ class _HomePageState extends State<HomePage> {
                     NavigationRailDestination(
                       icon: Icon(Icons.collections_bookmark),
                       label: Text('Cards'),
-                    ),
-                    NavigationRailDestination(
-                      icon: Icon(Icons.build),
-                      label: Text('Test'),
                     ),
                   ],
                   selectedIndex: selectedIndex,
