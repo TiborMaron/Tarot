@@ -11,6 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Tarot',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
@@ -26,11 +27,16 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const HomePage(title: 'Tarot'),
+
+      // AppBar for later usage
+      // home: const HomePage(title: 'Tarot'),
+      home: DrawCard(),
     );
   }
 }
 
+
+// TODO: AppBar for later usage / deletion
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.title});
 
