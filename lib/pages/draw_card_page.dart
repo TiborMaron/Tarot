@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Card;
 import 'dart:math' as math;
+import '../models/card.dart';
 
 class DrawCard extends StatefulWidget {
   const DrawCard({super.key});
@@ -20,12 +21,18 @@ class DrawCardState extends State<DrawCard> with SingleTickerProviderStateMixin 
     super.dispose();
   }  
 
+  Card? _selectedCard;
   bool _showImage = false;
+
+  final List<Card> _cardDeck = [
+    Card(name: 'The Tower', assetPath: 'assets/cards/the_tower.webp'),
+  ];
 
   void _toggleImage() {
     setState(() {
       _showImage = !_showImage;
       if (_showImage) {
+        _selectedCard = _cardDeck[math.Random().nextInt(_cardDeck.length)];
         _controller.forward();
       } else {
         _controller.reverse();
@@ -63,7 +70,7 @@ class DrawCardState extends State<DrawCard> with SingleTickerProviderStateMixin 
                       borderRadius: BorderRadius.circular(20),
                       child: isFlipped
                           ? Image.asset(
-                              'assets/cards/the_tower.webp',
+                              _selectedCard?.assetPath ?? '',
                               fit: BoxFit.contain,
                             )
                           : Image.asset(
