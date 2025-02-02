@@ -32,6 +32,7 @@ class DrawCardState extends State<DrawCard> with SingleTickerProviderStateMixin 
     setState(() {
       _showImage = !_showImage;
       if (_showImage) {
+        // TODO: Change it to crytopgraphically safe random generator?
         _selectedCard = _cardDeck[math.Random().nextInt(_cardDeck.length)];
         _controller.forward();
       } else {
