@@ -26,6 +26,7 @@ class DrawCardState extends State<DrawCard> with SingleTickerProviderStateMixin 
 
   final List<Card> _cardDeck = [
     Card(name: 'The Tower', assetPath: 'assets/cards/the_tower.webp'),
+    Card(name: 'The Justice', assetPath: 'assets/cards/the_justice.webp'),
   ];
 
   void _toggleImage() {

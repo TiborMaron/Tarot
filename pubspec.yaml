@@ -58,6 +58,7 @@ flutter:
 
   assets:
     - assets/cards/the_tower.webp
+    - assets/cards/the_justice.webp
     - assets/cards/cover.webp
 
   # An image asset can refer to one or more resolution-specific "variants", see
