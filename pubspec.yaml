@@ -57,10 +57,7 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/cards/the_emperor.webp
-    - assets/cards/the_tower.webp
-    - assets/cards/the_justice.webp
-    - assets/cards/cover.webp
+    - assets/cards/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
