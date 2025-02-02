@@ -25,6 +25,7 @@ class DrawCardState extends State<DrawCard> with SingleTickerProviderStateMixin 
   bool _showImage = false;
 
   final List<Card> _cardDeck = [
+    Card(name: 'The Emperor', assetPath: 'assets/cards/the_emperor.webp'),
     Card(name: 'The Tower', assetPath: 'assets/cards/the_tower.webp'),
     Card(name: 'The Justice', assetPath: 'assets/cards/the_justice.webp'),
   ];
