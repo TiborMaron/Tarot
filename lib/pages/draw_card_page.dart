@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart' hide Card;
 import 'dart:math' as math;
 import '../models/card.dart';
+import '../models/card_deck.dart';
 
 class DrawCard extends StatefulWidget {
   const DrawCard({super.key});
@@ -26,12 +27,7 @@ class DrawCardState extends State<DrawCard> with SingleTickerProviderStateMixin 
   bool _isFlipped = false;
   final TextEditingController _textController = TextEditingController();
 
-  final List<Card> _cardDeck = [
-    Card(name: 'The Emperor', assetPath: 'assets/cards/the_emperor.webp'),
-    Card(name: 'The Tower', assetPath: 'assets/cards/the_tower.webp'),
-    Card(name: 'The Justice', assetPath: 'assets/cards/the_justice.webp'),
-    Card(name: 'Nine of Wands', assetPath: 'assets/cards/nine_of_wands.webp'),
-  ];
+  final List<Card> _cardDeck = cardDeck;
 
   void _toggleCard() {
     setState(() {
