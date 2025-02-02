@@ -18,11 +18,13 @@ class DrawCardState extends State<DrawCard> with SingleTickerProviderStateMixin 
   @override
   void dispose() {
     _controller.dispose();
+    _textController.dispose();
     super.dispose();
   }  
 
   Card? _selectedCard;
-  bool _showImage = false;
+  bool _isFlipped = false;
+  final TextEditingController _textController = TextEditingController();
 
   final List<Card> _cardDeck = [
     Card(name: 'The Emperor', assetPath: 'assets/cards/the_emperor.webp'),
@@ -31,16 +33,17 @@ class DrawCardState extends State<DrawCard> with SingleTickerProviderStateMixin 
     Card(name: 'Nine of Wands', assetPath: 'assets/cards/nine_of_wands.webp'),
   ];
 
-  void _toggleImage() {
+  void _toggleCard() {
     setState(() {
-      _showImage = !_showImage;
-      if (_showImage) {
+      if (!_isFlipped) {
         // TODO: Change it to crytopgraphically safe random generator?
         _selectedCard = _cardDeck[math.Random().nextInt(_cardDeck.length)];
         _controller.forward();
       } else {
         _controller.reverse();
+        _textController.clear();
       }
+      _isFlipped = !_isFlipped;
     });
   }
 
@@ -92,6 +95,7 @@ class DrawCardState extends State<DrawCard> with SingleTickerProviderStateMixin 
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: TextField(
+                controller: _textController,
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: Colors.white,
@@ -110,11 +114,14 @@ class DrawCardState extends State<DrawCard> with SingleTickerProviderStateMixin 
 
             // Button
             ElevatedButton.icon(
-              onPressed: _toggleImage,
-              icon: const Icon(Icons.visibility, color: Colors.black),
-              label: const Text(
-                'Show Card',
-              style: TextStyle(color: Colors.black),),
+              onPressed: _toggleCard,
+              icon: Icon(
+                _isFlipped ? Icons.cached : Icons.visibility,
+                color: Colors.black),
+              label: Text(
+                _isFlipped ? 'New Question' : 'Show Card',
+                style: TextStyle(color: Colors.black),
+              ),
             ),
             
             const SizedBox(height: 10),
